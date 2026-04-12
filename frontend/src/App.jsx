@@ -1,17 +1,18 @@
-import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
-import Home from './views/Home';
-import Products from './views/Products';
-import Stats from './views/Stats';
+import React from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import Products from "./pages/Products";
+import Stats from "./pages/Stats";
 
 export default function App() {
   return (
-    <div style={{ fontFamily: 'sans-serif', padding: '1rem' }}>
-      <nav style={{ marginBottom: '1rem' }}>
-        <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
-        <Link to="/products" style={{ marginRight: '1rem' }}>Products</Link>
+    <div>
+      <nav style={{ display: "flex", gap: "1rem" }}>
+        <Link to="/">Home</Link>
+        <Link to="/products">Products</Link>
         <Link to="/stats">Stats</Link>
       </nav>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
