@@ -1,30 +1,25 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export default function Stats() {
   const [stats, setStats] = useState(null);
-  const [cacheStatus, setCacheStatus] = useState(null);
 
   useEffect(() => {
-    const loadStats = async () => {
-      const res = await fetch("/api/stats");
-      const data = await res.json();
-      setStats(data);
-      setCacheStatus(res.headers.get("X-Cache-Status"));
-    };
-    loadStats();
+    fetch('/api/stats')
+      .then((res) => res.json())
+      .then(setStats)
+      .catch(console.error);
   }, []);
+
+  if (!stats) return <div>Loading stats...</div>;
 
   return (
     <div>
       <h2>Stats</h2>
-      {!stats && <p>Loading…</p>}
-      {stats && (
-        <div>
-          <p>Total products: {stats.totalItems}</p>
-          <p>Backend instance ID: {stats.instanceId}</p>
-          <p>Nginx cache: {cacheStatus}</p>
-        </div>
-      )}
+      <p>Total products: {stats.totalItems}</p>
+      <p>Backend instance ID: {stats.instanceId}</p>
+      <p>Server uptime (s): {stats.uptime}</p>
+      <p>Requests handled: {stats.requestCount}</p>
+      <p>Server time: {stats.serverTime}</p>
     </div>
   );
 }

@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: product-dashboard-backend:latest
+    environment:
+      - INSTANCE_ID=backend-1
+    networks:
+      - dashboard_net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: product-dashboard-frontend:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - dashboard_net
+
+networks:
+  dashboard_net:
+    driver: bridge
