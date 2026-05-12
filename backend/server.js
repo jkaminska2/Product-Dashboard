@@ -49,6 +49,11 @@ app.get('/health', (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Backend listening on port ${port}, instance ${INSTANCE_ID}`);
-});
+
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Backend listening on port ${port}, instance ${INSTANCE_ID}`);
+  });
+}
+
+module.exports = app;

@@ -2,13 +2,17 @@
   "name": "product-dashboard-backend",
   "version": "1.0.0",
   "main": "server.js",
-  "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest --runInBand"
   },
   "dependencies": {
     "express": "^4.19.0",
     "cors": "^2.8.5",
     "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "supertest": "^6.3.0"
   }
 }
